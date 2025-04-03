@@ -74,3 +74,5 @@ ping -c 4 192.168.1.101  # Desde maquina2 a maquina1
 ![Cantidad elementos](Imagenes/conexxion.png)
 
 Si el ping es exitoso, la configuración de red está completa. 🚀
+para instalar hadoop se a tenido un problema con la vercion de maquina virtual no se puso instalar java asi que se cambio a a vercion 22 de ubuntu y siguiendo los mismos pasos nos queda de esta manera el cluster:
+![Cantidad elementos](Imagenes/cluster_Final.png)
