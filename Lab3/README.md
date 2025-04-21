@@ -76,3 +76,105 @@ ping -c 4 192.168.1.101  # Desde maquina2 a maquina1
 Si el ping es exitoso, la configuración de red está completa. 🚀
 para instalar hadoop se a tenido un problema con la vercion de maquina virtual no se puso instalar java asi que se cambio a a vercion 22 de ubuntu y siguiendo los mismos pasos nos queda de esta manera el cluster:
 ![Cantidad elementos](Imagenes/cluster_Final.png)
+
+## Verificación del Funcionamiento del Clúster Hadoop
+
+Una vez configurado todo el entorno, se procede a validar que los servicios están correctamente ejecutándose y que los nodos se reconocen entre sí.
+
+### 🗂️ Información del NameNode
+
+Se puede acceder a través del navegador en la dirección `http://maquina1:9870`. Esta es la interfaz principal del HDFS, y desde ahí se obtiene un resumen del estado del sistema de archivos distribuido.
+
+![Información del NameNode](Imagenes/HadoopNodosvivos.png)
+
+En esta vista se muestra:
+- La capacidad total del clúster.
+- Cantidad de nodos activos.
+- Bloques replicados y estado del almacenamiento.
+- Espacio utilizado y disponible.
+
+---
+
+### 📊 Estado del ResourceManager (YARN)
+
+Desde el navegador en `http://maquina1:8088`, se accede a la interfaz de YARN que permite gestionar los recursos del clúster.
+
+![Estado de YARN](Imagenes/YarnPrueba.png)
+
+Aquí se observa:
+- Número de nodos activos.
+- Scheduler en uso (Capacity Scheduler).
+- Número de aplicaciones corriendo (en este caso, ninguna).
+- Métricas de uso de memoria y recursos.
+
+---
+
+## ⚙️ Verificación con `jps` en Cada Nodo
+
+El comando `jps` permite listar los procesos Java activos en cada nodo, confirmando que los servicios de Hadoop están en ejecución.
+
+### máquina1 - Nodo Maestro
+
+![jps máquina1](Imagenes/jpsmaquina1.png)
+
+Servicios ejecutándose:
+- `NameNode`: gestor del HDFS.
+- `ResourceManager`: coordinador de YARN.
+- `Jps`: utilidad para ver procesos Java.
+
+---
+
+### máquina2 - Nodo Esclavo
+
+![jps máquina2](Imagenes/jpsmaquina2.png)
+
+Servicios ejecutándose:
+- `DataNode`: almacenamiento del HDFS.
+- `NodeManager`: ejecutor de tareas YARN.
+- `Jps`: utilidad para ver procesos Java.
+
+---
+
+### máquina3 - Nodo Esclavo
+
+![jps máquina3](Imagenes/jpsmaquina3.png)
+
+Servicios ejecutándose:
+- `DataNode`: nodo de almacenamiento.
+- `NodeManager`: administrador de recursos local.
+- `Jps`: utilidad para ver procesos Java.
+
+---
+
+## 🧰 Configuración de las Máquinas Virtuales
+
+Las siguientes imágenes muestran la configuración usada para cada una de las VMs en VirtualBox.
+
+### máquina1 (Nodo Maestro)
+
+![Configuración VM1](Imagenes/maquinaVirtual1.png)
+
+- 3 procesadores.
+- 7 GB de RAM.
+- Disco de 25 GB.
+- Red interna configurada como `hadoop-net`.
+
+---
+
+### máquina2 (Nodo Esclavo)
+
+![Configuración VM2](Imagenes/maquinaVirtual2.png)
+
+- Mismos recursos que máquina1.
+- Participa como DataNode y NodeManager.
+
+---
+
+### máquina3 (Nodo Esclavo)
+
+![Configuración VM3](Imagenes/maquinaVirtual3.png)
+
+- Recursos idénticos a las demás máquinas.
+- Nodo adicional de trabajo para el clúster.
+
+---
