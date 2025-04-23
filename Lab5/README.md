@@ -142,3 +142,39 @@ FROM word_table
 GROUP BY palabra
 ORDER BY total DESC;
 ```
+
+## Paso 7: Calculando el número de entradas en el log por cada usuario
+![Cantidad elementos](Imagenes/SubirLogWeb.png)
+
+Subir los datos log de la web para realizar consultas
+![Cantidad elementos](Imagenes/CrearTablaWeb.png)
+crear la tabla con esos datos
+![Cantidad elementos](Imagenes/WordCount.png)
+aser el word count de cada usuario
+
+## Paso 8: Calculando el promedio de visitas por cada usuario 
+
+![Cantidad elementos](Imagenes/SacarPromedio.png)
+Agrupa todas las filas por usuario (GROUP BY user) y cuenta cuántas entradas tiene cada uno (COUNT(*)).
+```bash
+SELECT 
+  AVG(user_count) AS avg_visits_per_user
+FROM (
+  SELECT 
+    `user`, 
+    COUNT(*) AS user_count
+  FROM user_logs
+  GROUP BY `user`
+) AS per_user_counts;
+```
+
+![Cantidad elementos](Imagenes/UsuariosConteo.png)
+también listar los usuarios y sus conteos:
+```bash
+SELECT 
+  `user`, 
+  COUNT(*) AS total_visits
+FROM user_logs
+GROUP BY `user`
+ORDER BY total_visits DESC;
+```
