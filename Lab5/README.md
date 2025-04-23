@@ -111,3 +111,34 @@ Puedes probar la instalación listando las bases de datos:
 ```bash
 show databases;
 ```
+
+## Paso 6: WordCount 
+
+### Paso 1: Generar y subir database
+![Cantidad elementos](Imagenes/Subirhdfs.png)
+
+Generar y subir un txt a HDFS para crear la tabla en hive
+### Paso 2: Crear la tabla externa en Hive
+![Cantidad elementos](Imagenes/CrearTablahive.png)
+
+```bash
+CREATE EXTERNAL TABLE if not exists word_table (
+  palabra STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\n'
+STORED AS TEXTFILE
+LOCATION '/user/jav/wordcount';
+```
+Es una tabla externa, lo que significa que Hive no borra los datos de HDFS al eliminarla.
+Hive leerá directamente desde HDFS en /user/jav/wordcount.
+### Paso 3: Contar las palabras (WordCount)
+
+![Cantidad elementos](Imagenes/ResultadoFinal.png)
+Colocar este comando para buscar en la tabla la cantidad de palabras repetidas
+```bash
+SELECT palabra, COUNT(*) as total
+FROM word_table
+GROUP BY palabra
+ORDER BY total DESC;
+```
