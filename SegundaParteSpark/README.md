@@ -10,6 +10,8 @@ sudo mv spark-3.5.0-bin-hadoop3 /usr/local/spark
 ## Paso 2: Configuración de variables de entorno
 
 Abrir el archivo ~/.bashrc y añade las lineas 
+
+
 ![Cantidad elementos](Imagenes/variablesdeentorno1.png)
 
 Luego, aplica los cambios con:
@@ -48,6 +50,8 @@ export SPARK_WORKER_INSTANCES=1
 export SPARK_WORKER_DIR=/usr/local/spark/work
 ```
 en mi caso este seria mis nodos esclavos:
+
+
 ![Cantidad elementos](Imagenes/ModificacionNodos3.png)
 
 aser esto en todos los nodos incluido el host
@@ -55,6 +59,8 @@ aser esto en todos los nodos incluido el host
 ## Paso 4: Resultado Final:
 
 ![Cantidad elementos](Imagenes/ResultadoSparkFinal.png)
+
+
 posteriormente revisar en la pagina http://maquina1:8080 para verificar que esten funcionando los worked
 para inicializar usar estos pasos:
 ```bash
@@ -65,5 +71,9 @@ start-slave.sh spark://maquina1:7077
 ```
 
 ## Paso 5: Problemas encontrados
+
+
 ![Cantidad elementos](Imagenes/ProblemaEncontrado1.png)
+
+
 en caso que no reconosca los nodos spark verificar el archivo nano /usr/local/spark/conf/workers no usar nombres usar ips
