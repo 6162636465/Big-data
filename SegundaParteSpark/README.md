@@ -31,6 +31,8 @@ finalmente para ver si se instalo el framework colocar :
 spark-shell --version
 ```
 deve salir la siguiente imagen
+
+
 ![Cantidad elementos](Imagenes/VerificacionSpark.png)
 
 aser estos pasos en los nodos esclavos
